@@ -1,1 +1,112 @@
-<p>tutorial works!</p>
+<div class="tutorial-window" *ngIf="skip == false">
+
+    <div class="outer-div">
+
+        <div>{{ this.curr_page }} / 8</div>
+
+        <div *ngIf="this.curr_page == 1">
+            <h3>Welcome to Pathfinding Visualizer</h3>
+            <h5>This quick tutorial will walk you through all of the features of this app.</h5>
+            <p class="pmarg">
+                If you want to dive right in, feel free to click the "Skip Tutorial" button below. 
+                Otherwise, click "Next" to continue!
+            </p>
+            <div class="map-path-icon"></div>
+        </div>
+
+        <div *ngIf="this.curr_page == 2">
+            <h3>What is a pathfinding algorithm?</h3>
+            <h5>
+                Pathfinding algorithms seek to find the shortest path between two points. 
+                This app visualizes various pathfinding algorithms in action.
+            </h5>
+            <p class="pmarg">
+                All of the algorithms in this app are adapted for a 2D grid, 
+                where movements from one node to another have a "cost" of 1.
+            </p>
+            <div class="route-icon"></div>
+        </div>
+
+        <div *ngIf="this.curr_page == 3">
+            <h3>Picking an algorithm</h3>
+            <h5>Choose an algorithm from the "Algorithms" drop-down menu.</h5>
+            <p class="pmarg">
+                <i>Note that some algorithms are </i>
+                <i><b>weighted</b>, </i>
+                <i>while others are </i>
+                <i><b>unweighted</b>. </i>
+                <i>Unweighted algorithms do not take turns or weight nodes into account, </i>
+                <i>whereas weighted ones do. </i>
+                <i>Additionally, not all algorithms can guarantee the shortest path.</i>
+            </p>
+            <div class="pick-algo"></div>
+        </div>
+
+        <div *ngIf="this.curr_page == 4">
+            <h3>What is a pathfinding algorithm?</h3>
+            <h5>Not all algorithms are created equal.</h5>
+            <div class="divmarg">
+                <div>
+                    <i><b>Dijkstra's Algorithm </b></i>
+                    <i>(weighted): the father of all pathfinding algorithms; guarantees the shortest path.</i>
+                </div>
+                <div>
+                    <i><b>A* Search </b></i>
+                    <i>(weighted): arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's.</i>
+                </div>
+                <div>
+                    <i><b>Breadth-First Search (BFS) </b></i>
+                    <i>(unweighted): a great algorithm; guarantees the shortest path.</i>
+                </div>
+                <div>
+                    <i><b>Depth-First Search (DFS) </b></i>
+                    <i>(unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path.</i>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="this.curr_page == 5">
+            <h3>Adding walls and weights</h3>
+            <h5>Click on the grid to add a wall. Click "Add Weight" and then click on the grid to add a weight.</h5>
+            <p class="pmarg">
+                Walls are impenetrable, meaning that paths cannot cross through them. Weights, however, are not impassable. 
+                They are simply more "costly" to move through. In this app, moving through a weight node has a "cost" of 10.
+            </p>
+            <div class="add-walls-and-weights"></div>
+        </div>
+
+        <div *ngIf="this.curr_page == 6">
+            <h3>Dragging nodes</h3>
+            <h5>Click and drag the start and end nodes to move them.</h5>
+            <p class="pmarg">
+                Note that you can drag nodes even after an algorithm has finished running. 
+                This will allow you to instantly see different paths.
+            </p>
+            <div class="move-nodes"></div>
+        </div>
+
+        <div *ngIf="this.curr_page == 7">
+            <h3>Visualizing and more</h3>
+            <h5>Use the navbar buttons to visualize algorithms, and do other stuff!</h5>
+            <p class="pmarg">
+                You can clear the current path, any walls or weights, or even the entire board, all from the navbar.
+            </p>
+            <div class="navbar-icon"></div>
+        </div>
+
+        <div *ngIf="this.curr_page == 8">
+            <h3>Enjoy!</h3>
+            <h5>I hope you have as much fun playing around with this visualization tool as I had building it!</h5>
+            <div class="pmarg">
+                <i>If you want to view the source code for this app, check out my </i>
+                <i><a href="https://github.com/kennyenguyen/pathfinding-visualizer">GitHub</a>.</i>
+            </div>
+        </div>
+
+        <button class="btn btn-primary skip-btn" type="button" (click)="skipButton()">Skip Tutorial</button>
+        <button class="btn btn-primary prev-btn" type="button" (click)="prevButton()">Previous</button>
+        <button class="btn btn-primary next-btn" type="button" (click)="nextButton()">{{ next_or_finish }}</button>
+
+    </div>
+
+</div>

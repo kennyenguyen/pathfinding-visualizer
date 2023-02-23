@@ -1,0 +1,123 @@
+.outer-div {
+    position: relative;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 1);
+    width: 50%;
+    height: 80vh;
+    border: 2px solid #34495e;
+    border-radius: 4px;
+    text-align: center;
+    left: 24.1%;
+}
+
+.tutorial-window {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+}
+
+h3 {
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+h5 {
+    margin-block-start: 2.33em;
+    margin-block-end: 2.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.skip-btn {
+    margin: 5px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.next-btn {
+    margin: 5px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.prev-btn {
+    margin: 5px;
+    position: absolute;
+    right: 80px;
+    bottom: 0;
+}
+
+.pmarg {
+    margin: 30px;
+}
+
+.divmarg {
+    margin: 30px;
+    text-align: left;
+    font-size: medium;
+    line-height: 30px;
+}
+
+.map-path-icon {
+    width: 400px;
+    height: 400px;
+    background-image: url(../../../assets/map-path.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 30%;
+}
+
+.route-icon {
+    width: 300px;
+    height: 300px;
+    background-image: url(../../../assets/route.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 32%;
+}
+
+.pick-algo {
+    width: 300px;
+    height: 300px;
+    background-image: url(../../../assets/algorithms-menu.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 33%;
+}
+
+.add-walls-and-weights {
+    width: 500px;
+    height: 500px;
+    background-image: url(../../../assets/walls-and-weights.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 20%;
+}
+
+.move-nodes {
+    width: 500px;
+    height: 500px;
+    background-image: url(../../../assets/pathvis.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 20%;
+}
+
+.navbar-icon {
+    width: 900px;
+    height: 100px;
+    background-image: url(../../../assets/navbar.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: -27px;
+}
