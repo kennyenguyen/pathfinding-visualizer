@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a href="#" class="navbar-brand">Pathfinding Visualizer</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -12,7 +12,7 @@
                 <a href="#" class="nav-link" (click)="this.visualize.canVisualize == true ? clearBoardForVisualize() : false">Clear Shortest Path</a>
             </li>
             <li class="nav-item dropdown active">
-                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Algorithms
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -43,8 +43,8 @@
 <div class="algo-info" *ngIf="this.algorithm == 0">
     <i>Depth-First Search Algorithm is </i>
     <i><b>unweighted </b></i>
-    <i>and does </i>
-    <i><b>not guarantee </b></i>
+    <i>and </i>
+    <i><b>does not guarantee </b></i>
     <i>the shortest path.</i>
 </div>
 
@@ -93,3 +93,5 @@
         </td>
     </tr>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

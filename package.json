@@ -24,6 +24,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.3",
+    "popper.js": "^1.16.1",
     "queue-typescript": "^1.0.1",
     "rxjs": "~7.5.0",
     "stack-typescript": "^1.0.4",

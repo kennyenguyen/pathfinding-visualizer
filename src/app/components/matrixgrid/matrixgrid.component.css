@@ -23,7 +23,7 @@
 
 .node-col-checked {
     background-color: white;
-    animation-name: "animationAddWall";
+    animation-name: animationAddWall;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
     outline-style: solid;
@@ -66,7 +66,7 @@
     background-size: 80% 80%;
     background-repeat: no-repeat;
     background-position: center;
-    animation-name: "animationVisited";
+    animation-name: animationVisited;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
 }
@@ -81,7 +81,7 @@
     background-size: 80% 80%;
     background-repeat: no-repeat;
     background-position: center;
-    animation-name: "animationShortestPath";
+    animation-name: animationShortestPath;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
 }
@@ -106,7 +106,7 @@
     outline-width: 0.01cm;
     width: 25px;
     height: 25px;
-    animation-name: "animationVisited";
+    animation-name: animationVisited;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
     background-color: white;
@@ -117,7 +117,7 @@
     outline-width: 0.01cm;
     width: 25px;
     height: 25px;
-    animation-name: "animationShortestPath";
+    animation-name: animationShortestPath;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
     background-color: rgb(84, 121, 254);
