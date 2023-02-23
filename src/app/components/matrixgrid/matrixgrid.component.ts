@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AStar } from 'src/app/models/AStar';
+import { BFSAlgorithm } from 'src/app/models/BFS';
+import { DFSAlgorithm } from 'src/app/models/DFS';
+import { Dijkstra } from 'src/app/models/Dijkstra';
 import { MatrixNode } from 'src/app/models/MatrixNode';
 import { Visualize } from 'src/app/models/Visualize';
 
@@ -130,36 +134,198 @@ export class MatrixgridComponent implements OnInit {
         this.isEndClick = false;
     }
 
-    public addWallOrMoveNode(i: number, j: number) {}
+    public addWallOrMoveNode(i: number, j: number) {
+        if (this.isStartClick == false && this.isEndClick == false) {
+            this.addWall(i, j);
+        } else if (this.isStartClick == true) {
+            this.moveStartNode(i, j);
+        } else {
+            this.moveEndNode(i, j);
+        }
+    }
 
-    public moveStartNode(i: number, j: number) {}
+    public moveStartNode(i: number, j: number) {
+        if (this.visualize.canVisualize == true) {
+            let oldStart = this.findStartNode();
+            oldStart.state = state.empty;
+            if (this.matrix[i][j].state != state.wall && this.matrix[i][j].state != state.end && this.matrix[i][j].state != state.weight && this.matrix[i][j].value != 10) {
+                this.matrix[i][j].state = state.start;
+            } else {
+                oldStart.state = state.start;
+            }
+        }
+        if (this.choseAlgo == true) {
+            this.startVisualize(this.visualize.canVisualize, true);
+        }
+    }
 
-    public moveEndNode(i: number, j: number) {}
+    public moveEndNode(i: number, j: number) {
+        if (this.visualize.canVisualize == true) {
+            let oldEnd = this.findEndNode();
+            oldEnd.state = state.empty;
+            if (this.matrix[i][j].state != state.wall && this.matrix[i][j].state != state.start && this.matrix[i][j].state != state.weight && this.matrix[i][j].value != 10) {
+                this.matrix[i][j].state = state.end;
+            } else {
+                oldEnd.state = state.end;
+            }
+        }
+        if (this.choseAlgo == true) {
+            this.startVisualize(this.visualize.canVisualize, true);
+        }
+    }
 
-    public clearBoard() {}
+    public clearBoard() {
+        this.choseAlgo = false;
+        let m = this.matrix.length;
+        let n = this.matrix[0].length;
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (this.matrix[i][j].state != state.start && this.matrix[i][j].state != state.end) {
+                    this.matrix[i][j].state = state.empty;
+                }
+                if (this.matrix[i][j].value == 10) {
+                    this.matrix[i][j].state = state.weight;
+                }
+                if (this.matrix[i][j].state != state.weight) {
+                    this.matrix[i][j].value = 1;
+                }
+            }
+        }
+    }
 
-    public startVisualize(canVisualize: boolean, isMoveNode?: boolean) {}
+    public startVisualize(canVisualize: boolean, isMoveNode?: boolean) {
+        this.choseAlgo = true;
+        if (canVisualize) {
+            this.visualize.canVisualize = false;
+            this.clearBoardForVisualize(true);
+            switch (this.algorithm) {
+                case algo.DFS:
+                    this.DFSAlgo(isMoveNode);
+                    break;
+                case algo.BFS:
+                    this.BFSAlgo(isMoveNode);
+                    break;
+                case algo.Dijkstra:
+                    this.DijkstraAlgo(isMoveNode);
+                    break;
+                case algo.AStar:
+                    this.AStarAlgo(isMoveNode);
+                    break;
+            }
+        }
+    }
 
-    public clearBoardForVisualize(fromStartVis?: boolean) {}
+    public clearBoardForVisualize(fromStartVis?: boolean) {
+        if (fromStartVis == true) {
+            this.choseAlgo = true;
+        } else {
+            this.choseAlgo = false;
+        }
+        let m = this.matrix.length;
+        let n = this.matrix[0].length;
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (this.matrix[i][j].state == state.shortestPath || this.matrix[i][j].state == state.visited) {
+                    this.matrix[i][j].state = state.empty;
+                }
+                if (this.matrix[i][j].value == 10) {
+                    this.matrix[i][j].state = state.weight;
+                }
+            }
+        }
+    }
 
-    public findStartNode() {}
+    public findStartNode() {
+        let m = this.matrix.length;
+        let n = this.matrix[0].length;
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (this.matrix[i][j].state == state.start) {
+                    return this.matrix[i][j];
+                }
+            }
+        }
+    }
 
-    public findEndNode() {}
+    public findEndNode() {
+        let m = this.matrix.length;
+        let n = this.matrix[0].length;
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (this.matrix[i][j].state == state.end) {
+                    return this.matrix[i][j];
+                }
+            }
+        }
+    }
 
-    public toggleAddWeight() {}
+    public toggleAddWeight() {
+        this.addWeight = !this.addWeight;
+    }
 
-    public selected(selectedAlgo: string) {}
+    public selected(selectedAlgo: string) {
+        switch (selectedAlgo) {
+            case "BFS":
+                this.clearWeight();
+                this.algorithm = algo.BFS;
+                break;
+            case "DFS":
+                this.clearWeight();
+                this.algorithm = algo.DFS;
+                break;
+            case "Dijkstra":
+                this.algorithm = algo.Dijkstra;
+                break;
+            case "AStar":
+                this.algorithm = algo.AStar;
+                break;
+        }
+    }
 
-    public clearWeight() {}
+    public clearWeight() {
+        let m = this.matrix.length;
+        let n = this.matrix[0].length;
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (this.matrix[i][j].state == state.weight) {
+                    this.matrix[i][j].state = state.empty;
+                    this.matrix[i][j].value = 1;
+                }
+            }
+        }
+    }
 
-    public algorithmToString() {}
+    public algorithmToString() {
+        switch (this.algorithm) {
+            case algo.DFS:
+                return "DFS";
+            case algo.BFS:
+                return "BFS";
+            case algo.Dijkstra:
+                return "Dijkstra";
+            case algo.AStar:
+                return "AStar";
+        }
+    }
 
-    public DFSAlgo(isMoveNode?: boolean) {}
+    public DFSAlgo(isMoveNode?: boolean) {
+        let dfsAlgo = new DFSAlgorithm(this.matrix, this.visualize);
+        dfsAlgo.DFSAlgo(isMoveNode);
+    }
 
-    public BFSAlgo(isMoveNode?: boolean) {}
+    public BFSAlgo(isMoveNode?: boolean) {
+        let bfsAlgo = new BFSAlgorithm(this.matrix, this.visualize);
+        bfsAlgo.BFSAlgo(isMoveNode);
+    }
 
-    public DijkstraAlgo(isMoveNode?: boolean) {}
+    public DijkstraAlgo(isMoveNode?: boolean) {
+        let dijkstraAlgo = new Dijkstra(this.matrix, this.visualize);
+        dijkstraAlgo.DijkstraAlgo(isMoveNode);
+    }
 
-    public AStarAlgo(isMoveNode?: boolean) {}
+    public AStarAlgo(isMoveNode?: boolean) {
+        let aStarAlgo = new AStar(this.matrix, this.visualize);
+        aStarAlgo.AStarAlgo(isMoveNode);
+    }
 
 }

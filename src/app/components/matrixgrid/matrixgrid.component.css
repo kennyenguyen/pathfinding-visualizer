@@ -1,0 +1,153 @@
+@keyframes animationVisited {
+    from {background-color: white;}
+    to {background-color: rgb(84, 121, 254);}
+}
+
+@keyframes animationShortestPath {
+    from {background-color: rgb(84, 121, 254);}
+    to {background-color: yellow;}
+}
+
+@keyframes animationAddWall {
+    from {background-color: white;}
+    to {background-color: gray;}
+}
+
+.node-col {
+    outline-color: black;
+    outline-style: solid;
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+}
+
+.node-col-checked {
+    background-color: white;
+    animation-name: "animationAddWall";
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    outline-style: solid;
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+}
+
+.node-col-start {
+    outline-style: solid;
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    background-image: url(../../../assets/map-marker-alt.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.node-col-weight {
+    outline-style: solid;
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    background-image: url(../../../assets/lock.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.node-col-weight-visited {
+    outline-style: solid;
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    background-image: url(../../../assets/lock.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation-name: "animationVisited";
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.node-col-weight-shortest-path {
+    background-color: rgb(84, 121, 254);
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    background-image: url(../../../assets/lock.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation-name: "animationShortestPath";
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.align-icon {
+    font-size: larger;
+}
+
+.node-col-end {
+    outline-style: solid;
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+    background-image: url(../../../assets/flag-checkered.svg);
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.node-col-visited {
+    outline-style: solid;
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+    animation-name: "animationVisited";
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    background-color: white;
+}
+
+.node-col-shortest-path {
+    outline-style: solid;
+    outline-width: 0.01cm;
+    width: 25px;
+    height: 25px;
+    animation-name: "animationShortestPath";
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    background-color: rgb(84, 121, 254);
+}
+
+.legend-cells {
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.legend-text {
+    padding-right: 40px;
+    display: inline-block;
+}
+
+.grid-table {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 2%;
+    width: 100%;
+}
+
+.legend {
+    padding: 1%;
+    width: 100%;
+    text-align: center;
+}
+
+.algo-info {
+    text-align: center;
+    font-size: large;
+    color: rgb(52, 58, 64);
+}

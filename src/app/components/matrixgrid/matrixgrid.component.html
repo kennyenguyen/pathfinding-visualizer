@@ -1,1 +1,95 @@
-<p>matrixgrid works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">Pathfinding Visualizer</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a href="#" class="nav-link" (click)="this.visualize.canVisualize == true ? clearBoard() : false">Clear Board <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link" (click)="this.visualize.canVisualize == true ? clearBoardForVisualize() : false">Clear Shortest Path</a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Algorithms
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a href="#" class="dropdown-item" *ngFor="let algoName of this.algorithmNames" (click)="this.visualize.canVisualize == true ? selected(algoName) : false">{{ algoName }}</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <button class="btn btn-primary" type="button" (click)="startVisualize(this.visualize.canVisualize)">Start Visualize {{ this.algorithmToString() }}</button>
+            </li>
+            <li class="nav-item" [ngClass]="{'active': this.addWeight == true}">
+                <a href="#" class="nav-link" (click)="toggleAddWeight();">Add Weight <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="legend fa align-icon">
+    <div class="node-col legend-cells"></div><div class="legend-text"> Unvisited Node</div>
+    <div class="node-col-checked legend-cells"></div><div class="legend-text"> Wall Node</div>
+    <div class="fa-map-marker legend-cells"></div><div class="legend-text"> Start Node</div>
+    <div class="fa-flag-checkered legend-cells"></div><div class="legend-text"> End Node</div>
+    <div class="node-col-visited legend-cells"></div><div class="legend-text"> Visited Node</div>
+    <div class="node-col-shortest-path legend-cells"></div><div class="legend-text"> Shortest Path Node</div>
+</div>
+
+<app-tutorial></app-tutorial>
+
+<div class="algo-info" *ngIf="this.algorithm == 0">
+    <i>Depth-First Search Algorithm is </i>
+    <i><b>unweighted </b></i>
+    <i>and does </i>
+    <i><b>not guarantee </b></i>
+    <i>the shortest path.</i>
+</div>
+
+<div class="algo-info" *ngIf="this.algorithm == 1">
+    <i>Breadth-First Search Algorithm is </i>
+    <i><b>unweighted </b></i>
+    <i>and </i>
+    <i><b>guarantees </b></i>
+    <i>the shortest path.</i>
+</div>
+
+<div class="algo-info" *ngIf="this.algorithm == 2">
+    <i>Dijkstra's Algorithm is </i>
+    <i><b>weighted </b></i>
+    <i>and </i>
+    <i><b>guarantees </b></i>
+    <i>the shortest path.</i>
+</div>
+
+<div class="algo-info" *ngIf="this.algorithm == 3">
+    <i>A* Search Algorithm is </i>
+    <i><b>weighted </b></i>
+    <i>and </i>
+    <i><b>guarantees </b></i>
+    <i>the shortest path.</i>
+</div>
+
+<div class="grid-table">
+    <tr *ngFor="let idx1 of count(30); index as i">
+        <td *ngFor="let idx2 of countAndCreate(63, i); index as j" 
+        (mouseover)="addWallOrMoveNode(i, j % 63)"
+        (mousedown)="checkMouseDown(i, j % 63)"
+        (mouseup)="checkMouseUp()"
+        ondragstart="return false;"
+        [ngClass]="{
+            'node-col-weight-visited': (this.matrix[i][j % 63].value == 10 && this.matrix[i][j % 63].state == 4),
+            'node-col-weight-shortest-path': (this.matrix[i][j % 63].value == 10 && this.matrix[i][j % 63].state == 5),
+            'node-col': (this.matrix[i][j % 63].value == 1 && this.matrix[i][j % 63].state == 0),
+            'node-col-checked': this.matrix[i][j % 63].state == 1,
+            'node-col-start': this.matrix[i][j % 63].state == 2,
+            'node-col-end': this.matrix[i][j % 63].state == 3,
+            'node-col-visited': (this.matrix[i][j % 63].value == 1 && this.matrix[i][j % 63].state == 4),
+            'node-col-shortest-path': (this.matrix[i][j % 63].value == 1 && this.matrix[i][j % 63].state == 5),
+            'node-col-weight': (this.matrix[i][j % 63].value == 10 || this.matrix[i][j % 63].state == 6)
+        }">
+        </td>
+    </tr>
+</div>
