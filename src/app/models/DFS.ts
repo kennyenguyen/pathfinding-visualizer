@@ -22,10 +22,10 @@ export class DFSAlgorithm extends Algorithm {
 
         let m = this.matrix.length;
         let n = this.matrix[0].length;
-
         let node_list = new Array<MatrixNode>();
         let visited = new Array<Array<boolean>>();
 
+        // initialize visited
         for (let i = 0; i < m; i++) {
             let row = new Array<boolean>();
             for (let j = 0; j < n; j++) {
@@ -40,6 +40,7 @@ export class DFSAlgorithm extends Algorithm {
         string_stack.push(start_node.row + ',' + start_node.col);
 
         while (string_stack.size > 0) {
+
             let x = string_stack.pop();
             let row = +x.split(',')[0];
             let col = +x.split(',')[1];
@@ -62,10 +63,11 @@ export class DFSAlgorithm extends Algorithm {
                 node_list.push(this.matrix[row][col]);
             }
 
-            string_stack.push((row - 1) + ',' + col); // up
-            string_stack.push((row + 1) + ',' + col); // down
-            string_stack.push(row + ',' + (col - 1)); // left
-            string_stack.push(row + ',' + (col + 1)); // right
+            string_stack.push(row + ',' + (col - 1)); // add left neighbor to stack
+            string_stack.push(row + ',' + (col + 1)); // add right neighbor to stack
+            string_stack.push((row - 1) + ',' + col); // add up neighbor to stack
+            string_stack.push((row + 1) + ',' + col); // add down neighbor to stack
+            
         }
 
         if (isMoveNode == true) {
