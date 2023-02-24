@@ -30,6 +30,7 @@ export class Dijkstra extends Algorithm {
         let dist = new Array<Array<number>>();
         let prev = new Array<Array<MatrixNode>>();
 
+        // initialize dist and prev
         for (let i = 0; i < m; i++) {
             let rowDist = new Array<number>();
             let rowPrev = new Array<MatrixNode>();
@@ -44,6 +45,7 @@ export class Dijkstra extends Algorithm {
         q = this.createSet();
         q.add(this.matrix[start_node.row][start_node.col])
 
+        // set start_node distance
         dist[start_node.row][start_node.col] = 0;
 
         while (q.size > 0) {
@@ -52,7 +54,7 @@ export class Dijkstra extends Algorithm {
 
             q.delete(u);
 
-            // up
+            // check up neighbor
             if (u.row - 1 >= 0 && this.matrix[u.row - 1][u.col].state != state.wall && this.isInSet(q, this.matrix[u.row - 1][u.col])) {
                 let alt = dist[u.row][u.col] + this.matrix[u.row - 1][u.col].value;
                 if (dist[u.row - 1][u.col] > alt) {
@@ -61,7 +63,7 @@ export class Dijkstra extends Algorithm {
                 }
             }
 
-            // down
+            // check down neighbor
             if (u.row + 1 < m && this.matrix[u.row + 1][u.col].state != state.wall && this.isInSet(q, this.matrix[u.row + 1][u.col])) {
                 let alt = dist[u.row][u.col] + this.matrix[u.row + 1][u.col].value;
                 if (dist[u.row + 1][u.col] > alt) {
@@ -70,7 +72,7 @@ export class Dijkstra extends Algorithm {
                 }
             }
 
-            // left
+            // check left neighbor
             if (u.col - 1 >= 0 && this.matrix[u.row][u.col - 1].state != state.wall && this.isInSet(q, this.matrix[u.row][u.col - 1])) {
                 let alt = dist[u.row][u.col] + this.matrix[u.row][u.col - 1].value;
                 if (dist[u.row][u.col - 1] > alt) {
@@ -79,7 +81,7 @@ export class Dijkstra extends Algorithm {
                 }
             }
 
-            // right
+            // check right neighbor
             if (u.col + 1 < n && this.matrix[u.row][u.col + 1].state != state.wall && this.isInSet(q, this.matrix[u.row][u.col + 1])) {
                 let alt = dist[u.row][u.col] + this.matrix[u.row][u.col + 1].value;
                 if (dist[u.row][u.col + 1] > alt) {
@@ -88,6 +90,7 @@ export class Dijkstra extends Algorithm {
                 }
             }
 
+            // reached the end
             if (this.matrix[u.row][u.col].state == state.end) {
                 this.reachedEnd = true;
                 node_list_shortest = this.getShortestPath(u, prev);
@@ -149,6 +152,7 @@ export class Dijkstra extends Algorithm {
         let node_list = new Set<MatrixNode>();
         let visited = new Array<Array<boolean>>();
 
+        // initialize visited
         for (let i = 0; i < m; i++) {
             let row = new Array<boolean>();
             for (let j = 0; j < n; j++) {
@@ -178,10 +182,10 @@ export class Dijkstra extends Algorithm {
                 node_list.add(this.matrix[row][col]);
             }
 
-            string_stack.push((row - 1) + ',' + col); // up
-            string_stack.push((row + 1) + ',' + col); // down
-            string_stack.push(row + ',' + (col - 1)); // left
-            string_stack.push(row + ',' + (col + 1)); // right
+            string_stack.push(row + ',' + (col - 1)); // add left neighbor to stack
+            string_stack.push(row + ',' + (col + 1)); // add right neighbor to stack
+            string_stack.push((row - 1) + ',' + col); // add up neighbor to stack
+            string_stack.push((row + 1) + ',' + col); // add down neighbor to stack
 
         }
 

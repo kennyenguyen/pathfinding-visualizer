@@ -48,6 +48,7 @@ export class AStar extends Algorithm {
             yet_to_visit_list.splice(curr_index, 1);
             visited_list.push(curr_node);
 
+            // reached the end
             if (curr_node.node.state == state.end) {
                 this.reachedEnd = true;
                 node_list_shortest = this.getShortestPath(curr_node);
@@ -57,17 +58,13 @@ export class AStar extends Algorithm {
             let children = Array<AStarNode>();
 
             for (let i = 0; i < 4; i++) {
-
                 let node_row = curr_node.node.row + move_row[i];
                 let node_col = curr_node.node.col + move_col[i];
-
                 if (node_row < 0 || node_col < 0 || node_row >= m || node_col >= n || this.matrix[node_row][node_col].state == state.wall) {
                     continue;
                 }
-
                 let new_node = new AStarNode(curr_node, this.matrix[node_row][node_col]);
                 children.push(new_node);
-
             }
 
             for (let i = 0; i < children.length; i++) {
