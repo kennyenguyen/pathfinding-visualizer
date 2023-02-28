@@ -13,6 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+                "queue-typescript",
+                "stack-typescript"
+            ],
             "outputPath": "dist/pathfinding-visualizer",
             "index": "src/index.html",
             "main": "src/main.ts",
